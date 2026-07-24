@@ -92,11 +92,13 @@ function updateCalculator() {
   const thicknessGroup = document.getElementById('thicknessGroup');
   const etchDepthGroup = document.getElementById('etchDepthGroup');
 
+  // ALWAYS keep material thickness visible
+  thicknessGroup.classList.remove('hidden');
+
+  // Toggle Target Etch Depth visibility based on task mode
   if (taskSelect.value === 'cut') {
-    thicknessGroup.classList.remove('hidden');
     etchDepthGroup.classList.add('hidden');
   } else {
-    thicknessGroup.classList.add('hidden');
     etchDepthGroup.classList.remove('hidden');
   }
 
@@ -192,4 +194,3 @@ form.addEventListener('input', updateCalculator);
 form.addEventListener('change', updateCalculator);
 
 initApp();
-  
