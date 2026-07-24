@@ -1,0 +1,253 @@
+/* ======================================================
+   SOLARPUNK NEUMORPHIC THEME
+   Palette: Warm Cream, Terracotta, Moss Green, Sun Yellow
+   ====================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color Palette */
+  --bg-color: #f3efe6;          /* Warm sandstone / recycled pulp texture base */
+  --card-bg: #f3efe6;
+  --text-main: #2d3b2d;        /* Deep chlorophyll charcoal */
+  --text-muted: #6b7a6b;       /* Soft lichen grey-green */
+  
+  --accent-green: #3a7d44;     /* Lush foliage green */
+  --accent-amber: #d97706;     /* Golden hour sun */
+  --accent-terracotta: #c85a32;/* Clay tile red */
+  
+  /* Neumorphic Dual-Shadow Systems */
+  /* Convex / Flat element shadows */
+  --neu-flat-shadow: 
+    8px 8px 16px #d8d4cb, 
+    -8px -8px 16px #ffffff;
+  
+  --neu-flat-hover: 
+    12px 12px 20px #cdc9c0, 
+    -12px -12px 20px #ffffff;
+
+  /* Pressed / Inset container shadows */
+  --neu-pressed-shadow: 
+    inset 4px 4px 8px #d1cdb3, 
+    inset -4px -4px 8px #ffffff;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(58, 125, 68, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(217, 119, 6, 0.05) 0%, transparent 40%);
+  color: var(--text-main);
+  margin: 0;
+  padding: 20px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Changed from center to prevent top clipping on small screens */
+  min-height: 100vh;
+}
+
+/* Outer Card Container */
+.calculator-card {
+  background: var(--card-bg);
+  border-radius: 28px;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto; /* Ensures horizontal centering */
+  padding: 28px 20px; /* Balanced left/right mobile padding */
+  box-shadow: var(--neu-flat-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative Solarpunk Top Accent Bar */
+.calculator-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-amber), var(--accent-terracotta));
+}
+
+header h1 {
+  margin: 0 0 6px 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+header p {
+  margin: 0 0 24px 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Fieldset Sectioning */
+fieldset {
+  border: none;
+  border-radius: 20px;
+  padding: 20px; /* Equal internal padding all around */
+  margin: 0 0 24px 0; /* Reset margins */
+  width: 100%;
+  background: var(--card-bg);
+  box-shadow: var(--neu-flat-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fixed Legend Styling to prevent layout shifting */
+legend {
+  display: block;
+  width: 100%;
+  margin: 0 0 16px 0;
+  padding: 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-green);
+}
+
+/* Form Controls */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+/* Neumorphic Inset Inputs & Selects */
+input, select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--card-bg);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  box-shadow: var(--neu-pressed-shadow);
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+input:focus, select:focus {
+  box-shadow: 
+    inset 4px 4px 8px #d1cdb3, 
+    inset -4px -4px 8px #ffffff,
+    0 0 0 2px var(--accent-green);
+}
+
+/* Results Display Panel */
+.results-panel {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  box-shadow: var(--neu-flat-shadow);
+  width: 100%;
+}
+
+.results-panel h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+/* Tube Health Status Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: var(--neu-flat-shadow);
+  margin-bottom: 20px;
+}
+
+/* Results Grid Boxes */
+.grid-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.result-box {
+  background: var(--card-bg);
+  padding: 16px 12px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: var(--neu-pressed-shadow);
+}
+
+.result-box .label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.result-box .value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-green);
+  margin: 6px 0 2px 0;
+}
+
+.result-box .unit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Alerts & Fail-safe Banner */
+.alert-box {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  box-shadow: var(--neu-flat-shadow);
+}
+
+.alert-box.warning {
+  background-color: #fef3c7;
+  color: #854d0e;
+  border-left: 4px solid var(--accent-amber);
+}
+
+.alert-box.danger {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid var(--accent-terracotta);
+}
+
+.hidden {
+  display: none !important;
+}
