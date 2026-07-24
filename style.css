@@ -45,7 +45,7 @@ body {
   padding: 20px 12px;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Changed from center to prevent top clipping on small screens */
+  align-items: flex-start;
   min-height: 100vh;
 }
 
@@ -55,8 +55,8 @@ body {
   border-radius: 28px;
   max-width: 680px;
   width: 100%;
-  margin: 0 auto; /* Ensures horizontal centering */
-  padding: 28px 20px; /* Balanced left/right mobile padding */
+  margin: 0 auto;
+  padding: 28px 20px;
   box-shadow: var(--neu-flat-shadow);
   border: 1px solid rgba(255, 255, 255, 0.6);
   position: relative;
@@ -92,8 +92,8 @@ header p {
 fieldset {
   border: none;
   border-radius: 20px;
-  padding: 20px; /* Equal internal padding all around */
-  margin: 0 0 24px 0; /* Reset margins */
+  padding: 20px;
+  margin: 0 0 24px 0;
   width: 100%;
   background: var(--card-bg);
   box-shadow: var(--neu-flat-shadow);
@@ -101,20 +101,22 @@ fieldset {
   flex-direction: column;
 }
 
-/* Fixed Legend Styling to prevent layout shifting */
+/* Grouped Parameter Section Labels (Legend Fix) */
 legend {
   display: block;
+  float: none;
   width: 100%;
-  margin: 0 0 16px 0;
+  margin: 0 0 18px 0;
   padding: 0;
   font-weight: 700;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--accent-green);
+  text-align: left;
 }
 
-/* Form Controls */
+/* Form Controls & Labels */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -131,6 +133,7 @@ label {
   font-weight: 600;
   margin-bottom: 8px;
   color: var(--text-main);
+  text-align: left;
 }
 
 /* Neumorphic Inset Inputs & Selects */
