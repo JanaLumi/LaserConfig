@@ -1,0 +1,7 @@
+id,name,category,energy_coefficient,allow_cut,allow_etch,max_thickness_mm,safety_note
+plywood,Birch Plywood (Koivuvaneri),Wood Products,2.1,true,true,12.0,Laser-safe exterior/interior glue only. Ensure flat bed contact to prevent smoke traps.
+pmma,Acrylic / PMMA (Cast & Extruded),Plastics,1.3,true,true,15.0,Cast acrylic etches frosted white; extruded cuts cleaner. Keep air extraction ON at all times.
+solidwood,Solid Hardwood / Softwood,Wood Products,1.9,true,true,10.0,Density varies with grain. Watch for resinous pockets that can catch fire during slow passes.
+leather,Veg-Tanned Leather,Organics,1.5,true,true,5.0,MUST be vegetable-tanned. Chrome-tanned leather releases toxic chromium gases.
+cardboard,Corrugated Cardboard / MDF Board,Paper & Fiber,1.0,true,true,8.0,High risk of flare-up! Never leave machine unattended during fast vector passes.
+aluminium,Anodised / Coated Aluminium,Metals,0.7,false,true,0.0,CO2 laser cannot cut raw metal. Surface etching bleaches the oxide layer or vaporises coating.
