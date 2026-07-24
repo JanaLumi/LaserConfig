@@ -6,6 +6,7 @@ async function loadConfig() {
     const yamlText = await response.text();
     CONFIG = jsyaml.load(yamlText);
 
+    // Populate UI inputs with configuration file defaults
     document.getElementById('ratedPower').value = CONFIG.machine_info.rated_power_watts;
     document.getElementById('installDate').value = CONFIG.machine_info.tube_install_date;
     document.getElementById('usageIntensity').value = CONFIG.machine_info.weekly_usage;
@@ -51,17 +52,18 @@ function updateCalculator() {
   const alertBox = document.getElementById('alertBox');
   alertBox.className = 'alert-box hidden';
 
-  // Toggle Visibility for Etch Input
+  // Toggle Etch Depth Input Visibility & Constraints
   if (material === 'aluminium') {
     if (task === 'cut') taskSelect.value = 'etch';
     etchDepthGroup.classList.remove('hidden');
   } else if (task === 'cut') {
     etchDepthGroup.classList.add('hidden');
   } else {
+    // Show etch depth input whenever 'etch' task is selected
     etchDepthGroup.classList.remove('hidden');
   }
 
-  // FAIL-SAFE CHECK: Cap etch depth to 75% of total material thickness
+  // FAIL-SAFE: Automatically cap etch depth to 75% of material thickness
   let safetyCapTriggered = false;
   if (task === 'etch' && material !== 'aluminium') {
     const maxSafeDepth = thickness * 0.75;
@@ -72,7 +74,7 @@ function updateCalculator() {
     }
   }
 
-  // Calculate Tube Health
+  // Calculate Tube Degradation
   const tubeHealth = calculateTubeHealth(installDate, usage);
   const effectivePowerWatts = ratedPower * tubeHealth;
 
@@ -89,7 +91,7 @@ function updateCalculator() {
     badge.style.background = '#dcfce7'; badge.style.color = '#16a34a';
   }
 
-  // Speed, Power, and Lens Positioning
+  // Speed and Power Calculations
   let recSpeed = 20;
   let recPower = 80;
   let passes = 1;
@@ -99,7 +101,7 @@ function updateCalculator() {
   const airMult = CONFIG.air_assist_multipliers[air] || 1.0;
 
   if (task === 'cut' && material !== 'aluminium') {
-    // Through Cutting
+    // THROUGH CUT: Calculated based on full sheet thickness
     const requiredEnergy = baseEnergy * thickness;
     recSpeed = (effectivePowerWatts * 0.8 * airMult) / requiredEnergy;
     recPower = 85;
@@ -109,16 +111,15 @@ function updateCalculator() {
       recSpeed = recSpeed * passes;
     }
 
-    // Set focal point 1/3 into material thickness
     focusOffset = `-${(thickness / 3).toFixed(1)} (1/3 inside material)`;
   } else {
-    // Etching / Engraving
+    // ETCHING: Calculated based on target etch depth
     recPower = Math.min(Math.round(35 + (etchDepth * 20)), 90);
     recSpeed = (effectivePowerWatts * 2.2) / (etchDepth * baseEnergy);
     passes = 1;
 
-    // Lens height positioned at top surface of material
-    focusOffset = `0.0 (Focus on top of ${thickness}mm sheet)`;
+    // Focus stays on the top surface of the workpiece
+    focusOffset = `0.0 (Focus on surface of ${thickness}mm sheet)`;
   }
 
   recSpeed = Math.min(Math.max(Math.round(recSpeed), 1), 500);
@@ -129,12 +130,12 @@ function updateCalculator() {
   document.getElementById('resPasses').textContent = passes;
   document.getElementById('resFocus').textContent = focusOffset;
 
-  // Render Warnings and Alerts
+  // Render Warnings
   if (safetyCapTriggered) {
-    alertBox.textContent = `Safety Notice: Etch depth was automatically capped to ${etchDepth.toFixed(2)} mm (75% of material thickness) to prevent accidental burn-through or bed damage.`;
+    alertBox.textContent = `Safety Guardrail: Etch depth was capped to ${etchDepth.toFixed(2)} mm (75% of ${thickness} mm sheet thickness) to prevent accidental burn-through.`;
     alertBox.className = 'alert-box warning';
   } else if (material === 'aluminium') {
-    alertBox.textContent = 'Note: Standard CO2 lasers bleach or engrave the anodised oxide layer on aluminium. Through-cutting raw metal is not supported.';
+    alertBox.textContent = 'Note: Standard CO2 lasers bleach or engrave the anodised oxide layer on aluminium. Raw through-cutting is not supported.';
     alertBox.className = 'alert-box warning';
   } else if (healthPercent < 70) {
     alertBox.textContent = 'Laser tube health is below 70%. Consider tube replacement or checking optical beam alignment.';
