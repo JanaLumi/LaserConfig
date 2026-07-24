@@ -92,28 +92,25 @@ header p {
 fieldset {
   border: none;
   border-radius: 20px;
-  padding: 20px;
-  margin: 0 0 24px 0;
-  width: 100%;
+  padding: 24px 24px 20px 24px;
+  margin-bottom: 24px;
   background: var(--card-bg);
   box-shadow: var(--neu-flat-shadow);
   display: flex;
   flex-direction: column;
 }
 
-/* Grouped Parameter Section Labels (Legend Fix) */
+/* Position Legend Cleanly Inside the Border/Shadow Boundary */
 legend {
-  display: block;
-  float: none;
+  float: left;
   width: 100%;
-  margin: 0 0 18px 0;
+  margin-bottom: 16px;
   padding: 0;
   font-weight: 700;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--accent-green);
-  text-align: left;
 }
 
 /* Form Controls & Labels */
