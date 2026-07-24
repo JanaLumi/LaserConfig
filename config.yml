@@ -1,0 +1,34 @@
+# ======================================================
+# LASER CUTTER MACHINE & CALIBRATION CONFIGURATION
+# ======================================================
+
+machine_info:
+  rated_power_watts: 80
+  tube_install_date: "2025-10-15"   # YYYY-MM-DD
+  weekly_usage: "medium"            # light (<5h), medium (5-15h), heavy (>15h)
+  installed_lens: "2.0"             # 1.5, 2.0, or 4.0 inches
+  air_assist_level: "high"          # high, low, none
+
+# CO2 Tube Degradation Parameters
+tube_degradation:
+  monthly_passive_decay: 0.008      # ~0.8% loss per month idle
+  usage_hours_per_week:
+    light: 3
+    medium: 10
+    heavy: 25
+  active_wear_rate_per_100_hours: 0.01  # ~1% drop per 100 firing hours
+
+# Baseline energy index required per material (Joules/mm^2) per 1mm thickness.
+# Adjust these values based on empirical 10mm test cuts on your machine:
+material_energy_coefficients:
+  plywood: 1.8
+  pmma: 1.4
+  solidwood: 2.1
+  aluminium: 0.8
+
+# Air assist speed multipliers
+air_assist_multipliers:
+  high: 1.20   # High air flow speeds up vector cutting by ~20%
+  low: 1.00
+  none: 0.85
+  
