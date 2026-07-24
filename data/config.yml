@@ -4,7 +4,7 @@
 
 machine_info:
   rated_power_watts: 80
-  tube_install_date: "2025-10-15"   # YYYY-MM-DD
+  tube_install_date: "2025-06-15"   # YYYY-MM-DD
   weekly_usage: "medium"            # light (<5h), medium (5-15h), heavy (>15h)
   installed_lens: "2.0"             # 1.5, 2.0, or 4.0 inches
   air_assist_level: "high"          # high, low, none
